@@ -34,6 +34,8 @@ public class HomeWork2 {
                 arr1[i] = 0;
         }
 
+//        arr1[i] = arr1[i] == 1? 0:1;
+
         System.out.println("Трансформированный массив: " + Arrays.toString(arr1));
         System.out.println();
 
@@ -97,16 +99,17 @@ public class HomeWork2 {
         int min = 10, max = 0;
         int minCount = -1, maxCount = -1;
         for (int i = 0; i < arr5.length; i++) { //В цикле ищем значения min и max
-            if (arr5[i] < min) {
-                min = arr5[i];
-                minCount = i;
-            }
-            if (arr5[i] > max) {
-                max = arr5[i];
-                maxCount = i;
-            }
+//            if (arr5[i] < min) {
+//                min = arr5[i];
+//                minCount = i;
+//            }
+//            if (arr5[i] > max) {
+//                max = arr5[i];
+//                maxCount = i;
+//            }
+            min = Math.min(min, arr5[i]);
+            max = Math.max(max, arr5[i]);
         }
-
 
         System.out.println("Массив заполнен: " + Arrays.toString(arr5));
         System.out.println("Минимальное значение - " + min + " и находится в элементе № " + minCount);
@@ -145,6 +148,7 @@ public class HomeWork2 {
             if (n >= -10 && n <= 10)
                 break;
         }
+        scanner.close();
 
         int[] arr7 = new int[numbArr]; //Создаем исходный массив
         arrFill(arr7); //Заполняем исходный массив

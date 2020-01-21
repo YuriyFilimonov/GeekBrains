@@ -10,7 +10,7 @@ class HomeWork1{
         byte bt = (byte) Math.round(Math.random() *255 - 128);
         short sh = (short) Math.round(Math.random() *64000 - 32000);
         int i = (int) Math.round(Math.random() * 2000000000 - 1000000000);
-        long l = (long) Math.round(Math.random() * 2000000000 - 1000000000);
+        long l = Math.round(Math.random() * 2000000000 - 1000000000);
         float fl = (float) Math.random() * 2000000000 - 1000000000;
         double db = Math.random() * 2000000000 - 1000000000;
         char ch = (char) ('A' + Math.round(Math.random() * 64));
