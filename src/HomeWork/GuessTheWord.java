@@ -6,31 +6,40 @@ import java.util.Scanner;
 
 public class GuessTheWord {
     public static void main(String[] args) {
+        //Создаем массив типа String
         String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry",
                 "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut",
                 "pear", "pepper", "pineapple", "pumpkin", "potato"};
-        Random randomWord = new Random();
+        Random randomWord = new Random(); //Запускаем объект Random
+        Scanner scanWord = new Scanner(System.in); //Запускаем объект Scaner
+        String flag; //Флаг продолжения игры. Выбран тип String, чтобы можно было нажимать на любую клавишу
 
-        boolean flag = false;
         System.out.println("Игра \"Угадай слово\"");
 
         do {
             int indexRandomWord = randomWord.nextInt(words.length - 1);
             String referens = words[indexRandomWord];
-            System.out.println("Перед Вами - массив слов, из которвых генератор случайных чисел выбрал одно слово.");
-            System.out.println(Arrays.toString(words));
 
-            System.out.print("Какое слово загадал генератор? Напишите: ");
-            Scanner scanWord = new Scanner(System.in);
-            String guessWord = scanWord.next();
-            scanWord.close();
-            System.out.println(guessWord + "\t" + referens);
+            wordComparison(words, referens, scanWord); //Метод выполняет условие игры
 
-            wordComparison(referens, guessWord);
-        } while (flag);
+            System.out.print("Желаете продолжить игру? Да - 1/нет - любая клавиша: ");
+            flag = scanWord.next();
+        } while (flag.equals("1"));
+        scanWord.close();
     }
 
-    private static void wordComparison(String referens, String guessWord) {
+    private static String getWord(String[] words, String referens, Scanner scanWord) {
+        System.out.println("Перед Вами - массив слов, из которых генератор случайных чисел выбрал одно слово.");
+        System.out.println(Arrays.toString(words));
+
+        System.out.print("Какое слово загадал генератор? Напишите: ");
+        String guessWord = scanWord.next();
+        System.out.println(guessWord + "\t" + referens); //Подсказка для теста
+        return guessWord;
+    }
+
+    private static void wordComparison(String[] words, String referens, Scanner scanWord) {
+        String guessWord = getWord(words, referens, scanWord); //Метод принимает ответы игрока
         if (guessWord.equals(referens)) System.out.println("Вы угадали! Сгенерированное слово: " + referens);
         else {
             int j = 0;
@@ -50,11 +59,10 @@ public class GuessTheWord {
                 } else System.out.print('#');
             }
             System.out.println("\nСовпадающих букв: " + j);
-            System.out.print("Желаете продолжить угадывать слово? Да - 1/нет - любая клавиша");
-            Scanner scanChoice = new Scanner(System.in);
-            int choiceContinue = scanChoice.nextInt();
-            scanChoice.close();
-            if (choiceContinue == 1) wordComparison(referens, guessWord);
+            System.out.print("Желаете продолжить угадывать слово? Да - 1/нет - любая клавиша: ");
+            String choiceContinue = scanWord.next();
+            //Хотел где-то втиснуть рекурсию. С таким функционалом не очень удобно, зато рекурсия работает.
+            if (choiceContinue.equals("1")) wordComparison(words, referens, scanWord);
         }
     }
 }
